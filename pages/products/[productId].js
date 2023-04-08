@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Comment from "../../container/Comment";
-import { getCommentData } from "../pages/api/comment";
+import { getCommentData } from "../api/comment";
 
 export async function getServerSideProps(context) {
   const { params } = context;
