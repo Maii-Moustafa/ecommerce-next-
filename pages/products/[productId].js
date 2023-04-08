@@ -1,17 +1,27 @@
 import Image from "next/image";
 import Comment from "../../container/Comment";
+import { getCommentData } from "../pages/api/comment";
 
 export async function getServerSideProps(context) {
   const { params } = context;
   const productId = params.productId;
 
-  const data = await fetch(`https://fakestoreapi.com/products/${productId}`);
-  const product = await data.json();
+  const productData = await fetch(
+    `https://fakestoreapi.com/products/${productId}`
+  );
+  const product = await productData.json();
+
+  const commentData = await getCommentData();
+  const serializedData = commentData.map((comment) => ({
+    ...comment,
+    _id: comment._id.toString(),
+  }));
 
   console.log(product);
   return {
     props: {
       product,
+      serializedData,
     },
   };
 }
@@ -30,7 +40,7 @@ export default function Product(props) {
         </div>
       </div>
 
-      <Comment/>
+      <Comment />
     </>
   );
 }

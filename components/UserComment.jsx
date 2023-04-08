@@ -3,24 +3,12 @@
 import { useRouter } from "next/router";
 
 // import Link from "next/link";
-export const getServerSideProps = async (context) => {
-  const data = await getCommentData();
-  const serializedData = data.map((comment) => ({
-    ...comment,
-    _id: comment._id.toString(),
-  }));
-  return {
-    props: {
-      data,
-    },
-  };
-};
 
 export default function UserComment(props) {
   //   const router = useRouter();
   const { data } = props;
   console.log(data);
-//   if (!data?.length) <p>No comments yet</p>;
+  //   if (!data?.length) <p>No comments yet</p>;
 
   //   const handleComment=(id)
   return (
